@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.acorn.TourSpotMapper">
+
+	<!-- 여행지조회 -->
+	<select id="selectSpotAll" resultType="TourlistSpot">
+ 
+	  <![CDATA[
+	  
+	  
+		 select ROWNUM, a.contentid,a.contenttypeid,a.title, a.address ,  b.CONTENTID  as ck  from ( 
+		  
+		    SELECT ROWNUM, contentid,contenttypeid,title, address
+		           FROM (
+		            SELECT *
+		            FROM contentInfoTbl
+		            WHERE contenttypeid = '12' AND createdtime >= TO_CHAR(ADD_MONTHS(SYSDATE, -1), 'YYYYMMDD')
+		            ORDER BY createdtime DESC
+		     )  
+		 ) a
+		 left outer join mainTbl b
+		 on a.contentid = b.CONTENTID 
+ 
+        ]]>
+	</select>
+
+	<!-- 축제/행사 조회 -->
+	<select id="selectFestivalAll" resultType="TourlistSpot">
+	<![CDATA[
+
+		select ROWNUM, contentid,contenttypeid,title, address 
+		from (
+		select * 
+		from contentInfoTbl 
+		where contenttypeid = '15' 
+		AND createdtime >= TO_CHAR(ADD_MONTHS(SYSDATE, -1), 'YYYYMMDD')
+		order by createdtime desc)
+
+	]]>
+	</select>
+
+	<!-- 여행코스 조회 -->
+	<select id="selectCourseAll" resultType="TourlistSpot">
+	<![CDATA[
+		SELECT ROWNUM, contentid,contenttypeid, title, address
+		FROM (
+		    SELECT *
+		    FROM contentInfoTbl
+		    WHERE contenttypeid = '25'
+		        AND createdtime >= '20220101' -- 2022년 1월 1일 이후
+		        AND createdtime < '20240101'  -- 2024년 1월 1일 이전
+		    ORDER BY createdtime DESC)
+	]]>
+	</select>
+
+	<!-- 여행지저장 -->
+	<insert id="insertSpot" parameterType="TourlistSpot">
+		INSERT INTO mainTbl
+		(contentid, contenttypeid)
+		VALUES (#{contentid}, #{contenttypeid})
+	</insert>
+
+	<!-- 축제/행사 저장 -->
+	<insert id="insertFspot" parameterType="TourlistSpot">
+		INSERT INTO mainTbl
+		(contentid, contenttypeid)
+		VALUES (#{contentid}, #{contenttypeid})
+	</insert>
+	
+	<!-- 여행코스 저장 -->
+	<insert id="insertCspot" parameterType="TourlistSpot">
+		INSERT INTO mainTbl
+		(contentid, contenttypeid)
+		VALUES (#{contentid}, #{contenttypeid})
+	</insert>
+
+
+<delete id="deleteSpot">
+    DELETE FROM mainTbl
+    WHERE 1=1
+    AND contentid IN
+    <foreach collection="list" item="contentid" open="(" close=")" separator=",">
+        #{contentid}
+    </foreach>
+</delete>
+
+</mapper>  

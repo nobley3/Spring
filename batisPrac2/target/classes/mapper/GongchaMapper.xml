@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.acorn.GongchaMapper">
+
+	<select id="selectchaAll" resultType="GongchaDTO">
+		select * from gongchatbl
+	</select>
+
+	<select id="selectchaOne" resultType="GongchaDTO"
+		parameterType="String">
+		select * from gongchatbl where itemno = #{itemno}
+	</select>
+
+	<insert id="insert" parameterType="GongchaDTO">
+		insert into
+		gongchatbl(itemNo,chaname,chaprice)values(#{itemNo},#{chaname},#{chaprice})
+	</insert>
+
+	<delete id="deleteOne" parameterType="String">
+		delete from gongchatbl where itemNo = #{itemNo}
+	</delete>
+</mapper>

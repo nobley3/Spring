@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.acorn.MemberMapper">
+	<!-- resultType : 이 결과를 어떻게 담을거니 -->
+	<select id="selectAll" resultType="Member">
+		SELECT *
+		FROM membertb
+	</select>
+
+	<select id="selectOne" resultType="Member"
+		parameterType="String">
+		SELECT *
+		FROM membertb where id= #{id}
+	</select>
+
+
+	<delete id="deleteOne"    parameterType="String">
+		delete from membertb where id= #{id}
+	</delete>
+
+	<insert id="insert"   parameterType="Member">
+		insert into membertb(id,pwd,name) values (#{id},#{pw},#{name})
+	</insert>
+</mapper>
