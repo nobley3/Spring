@@ -11,8 +11,9 @@ public class TourlistSpot {
 	String title;
 	String address;
 	String ck;
+	String firstimage;
 	
-	public TourlistSpot(String contentid, int contenttypeid, String rownum, String title, String address,String ck) {
+	public TourlistSpot(String contentid, int contenttypeid, String rownum, String title, String address,String ck, String firstimage) {
 		super();
 		this.rownum = rownum;
 		this.contentid=contentid;
@@ -20,12 +21,17 @@ public class TourlistSpot {
 		this.title = title;
 		this.address = address;
 		this.ck = ck;
-		
+		this.firstimage = firstimage;
 	}
 	
+	public TourlistSpot(String contentid) {
+		
+		
+	}
 	public TourlistSpot() {
 		// TODO Auto-generated constructor stub
 	}
 	
+ 
 	
 }

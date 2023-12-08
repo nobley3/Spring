@@ -1,5 +1,6 @@
 package com.acorn.tourAlist;
 
+import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,17 @@ public class SpotService {
 		return dao.selectSpotAll();
 	}
 	
+	
+//	체크된 여행지 조회
+	public List<TourlistSpot> getSelectedSpots(){
+		return dao.getSelectedSpots();
+	}
+	
+//	여행지 삭제
+    public void deleteSelectedSpots(List<String> contentid )throws Exception {
+        dao.deleteSelectedSpots(contentid);
+    }
+	
 //	여행지저장
 	public String insertSpot(List<TourlistSpot> spot) {
 		try {
@@ -28,21 +40,18 @@ public class SpotService {
 		}
 	}
 	
-//	여행지 삭제
-	public String deleteSpot(List<TourlistSpot>spot) {
-		try {
-			dao.deleteSpot(spot);
-			return "여행지가 삭제되었습니다.";
-		} catch (Exception e) {
-			e.printStackTrace();
-			return "삭제실패";
-		}
-	}
+ 
 //	축제/행사 리스트
 	public List<TourlistSpot> selectFestivalAll(){
 		return dao.selectFestivalAll();
 	}
 
+//	체크된 축제/행사 조회
+	public List<TourlistSpot> selectedFestival(){
+		return dao.selectedFestival();
+	}
+	
+	
 //	축제/행사 저장
 	public String insertFspot(List<TourlistSpot> spot) {
 		try {
@@ -58,6 +67,11 @@ public class SpotService {
 //	여행코스조회
 	public List<TourlistSpot> selectCourseAll(){
 		return dao.selectCourseAll();
+	}
+	
+//	체크된 여행코스조회
+	public List<TourlistSpot> selectedCourse(){
+		return dao.selectedCourse();
 	}
 	
 //	여행코스저장

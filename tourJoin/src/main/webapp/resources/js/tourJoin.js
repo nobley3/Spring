@@ -193,6 +193,8 @@ $(document).ready(function(){
             return;
         }
 
+ 
+		
         // 회원가입시도
         let user = {
                 id:id, 
@@ -205,8 +207,6 @@ $(document).ready(function(){
             type : "post",
             data : user,
             success : function(response){
-                
-               
                // alert( response);
                 $("#resultMessage").text("회원가입이 완료되었습니다.");
             },

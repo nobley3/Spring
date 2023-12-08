@@ -16,7 +16,8 @@ public class JoinDAO {
 
 	@Autowired
 	DataSource ds;
-	
+
+//	회원가입
 	public void regiUser(User user) {
 		String sql="insert into USERTBL(userid,nickname,sort,pw,section,profileurl) values(?,?,'02',?,'01',null)";
 		try {

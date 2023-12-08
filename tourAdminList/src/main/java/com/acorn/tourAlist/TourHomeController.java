@@ -1,4 +1,4 @@
-package com.acorn.home;
+package com.acorn.tourAlist;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,7 +10,14 @@ public class TourHomeController {
 	public String homecontroller() {
 		return "home";
 	}
+	
+	
+	 
+	
+	
 }
 
+
+ 
 
  

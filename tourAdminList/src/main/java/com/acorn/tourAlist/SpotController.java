@@ -33,6 +33,14 @@ public class SpotController {
 		return "SpotList2";
 	}
 	
+	
+//	체크된 여행지 조회
+	@ResponseBody
+	@GetMapping("/selectedSpot")
+	public List<TourlistSpot> selectedSpot(){
+		return service.getSelectedSpots();
+	}
+	
 //	체크여행지저장
 	@ResponseBody
 	@PostMapping(value ="/confirmList")
@@ -40,15 +48,24 @@ public class SpotController {
 		String result = service.insertSpot(spot);
 		return result;
 	}
-	
-//	체크여행지 삭제
+
+//	체크여행지삭제
 	@ResponseBody
-	@PostMapping("/deleteSpot")
-	public String deleteSpot(@RequestBody List<TourlistSpot> spot) {
-		String result = service.deleteSpot(spot);
-		return result;
+	@PostMapping(value ="/deleteSelectedSpots")
+	public String deleteSelectedSpots(@RequestBody  List<String> contentid) {
+		System.out.println( "spot =="  +contentid);
+		
+		 // System.out.println( spot[0]);
+		   
+		 try {
+			System.out.println(contentid);
+			service.deleteSelectedSpots(contentid);
+			return "삭제 성공";
+		} catch (Exception e) {
+			 e.printStackTrace();
+		    return "삭제 중 오류 발생";
+		}
 	}
-	
 	
 //	행사/축제페이지(조회)
 	@GetMapping("/festivalList")
@@ -57,6 +74,13 @@ public class SpotController {
 		model.addAttribute("eventspots",eventspots);
 		return "FestivalList";
 	}
+	
+//	체크된 행사/축제페이지(조회)
+	@ResponseBody
+	@GetMapping(value = "/selectedF")
+	public List<TourlistSpot> selectedFestival(){
+		return service.selectedFestival();
+	} 
 	 
 //  행사/축제페이지 저장
 	@ResponseBody
@@ -73,6 +97,14 @@ public class SpotController {
 		model.addAttribute("course",course);
 		return "CourseList";
 	}
+	
+//	체크된 여행코스조회
+	@ResponseBody
+	@GetMapping("/selectedC")
+	public List<TourlistSpot> selectedCourse(){
+		return service.selectedCourse();
+	}
+	
 	
 //	여행코스저장
 	@ResponseBody
